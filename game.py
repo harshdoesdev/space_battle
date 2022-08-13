@@ -53,23 +53,11 @@ def createEnemy(x, y):
 # Creating collision method between bullet and enemy
 
 
-def isCollided(enemyX, enemyY, bulletX, bulletY):
-    distance = math.sqrt((math.pow(enemyX - bulletX, 2) +
-                         (math.pow(enemyY - bulletY, 2))))
+def isCollided(x1, y1, x2, y2):
+    distance = math.sqrt((math.pow(x1 - x2, 2) +
+                         (math.pow(y1 - y2, 2))))
 
     if distance < 27:
-        return True
-    else:
-        return False
-
-# Creating collision method between player and enemy to make the game over
-
-
-def isGameOver(playerX, playerY, enemyX, enemyY):
-    dist = math.sqrt((math.pow(playerX - enemyX, 2) +
-                      (math.pow(playerY - enemyY, 2))))
-    
-    if dist < 27:
         return True
     else:
         return False
@@ -168,10 +156,10 @@ while running:
         bullet_state = "ready"
 
     # Calling collided method
-    collission = isCollided(enemyX, enemyY, bulletX, bulletY)
+    collision = isCollided(enemyX, enemyY, bulletX, bulletY)
 
     # if collision occured then increase score and set bullet position to initial state
-    if(collission):
+    if(collision):
         bulletY = 480
         bullet_state = "ready"
         score += 1
@@ -179,7 +167,7 @@ while running:
 
     # calling gameover method to check the game is over or not
 
-    gameover = isGameOver(playerX,playerY,enemyX,enemyY)
+    gameover = isCollided(playerX,playerY,enemyX,enemyY)
 
     if gameover:
         exit()
